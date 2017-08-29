@@ -56,9 +56,11 @@ int main()
         << std::endl << std::endl;
 
     std::cout << "Final String As Hex:" << std::endl << 
-        hex.encodeIntoLowerCase(Utility::strXor(hex.decodeFromHex(original), 
-                    hex.decodeFromHex(key)));
-  
+        hex.encodeIntoHex(Utility::strXor(hex.decodeFromHex(original), 
+                    hex.decodeFromHex(key))) << std::endl << std::endl;
+ 
+    std::cout << "Press any key to continue..." << std::endl;
+
     //pause to observe output
     std::cin.get();
 }

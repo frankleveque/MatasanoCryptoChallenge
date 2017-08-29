@@ -13,6 +13,7 @@
 #include <sstream>
 #include <iostream>
 #include <cstring>
+#include <unordered_map>
 
 namespace Utility
 {
@@ -67,6 +68,42 @@ inline std::string bufferXor(char const* a, char const* b)
         temp += a[i] ^ b[i];
     }
     return temp;
+}
+
+
+inline uint32_t isProbablyEnglishScore(const std::string& str)
+{
+    std::unordered_map<char, int> occurrences;
+    int score = 0;
+
+    for(auto i=0U; i<str.size(); ++i){
+        //first letter frequency
+        if(str[i]==' '){
+            if((str[i+1] == 't') || (str[i+1] == 'a') || (str[i+1] == 's'))
+                    score+=5;
+        }
+        char lower = std::tolower(str[i]);
+        occurrences[lower]++;
+        }
+
+    //space is more common than e
+    if(occurrences[' '] > occurrences['e']) score+=3;
+
+    //letter frequency
+    if(occurrences['e'] / str.size() >= .10) score+=2;
+    if(occurrences['t'] / str.size() >= .09) score++;
+    if(occurrences['a'] / str.size() >= .08) score++;
+    if(occurrences['o'] / str.size() >= .07) score++;
+    if(occurrences['i'] / str.size() >= .06) score++;
+    if(occurrences['n'] / str.size() >= .06) score++;
+    if(occurrences['s'] / str.size() >= .06) score++;
+    if(occurrences['r'] / str.size() >= .06) score++;
+    if(occurrences['h'] / str.size() >= .055) score++;
+    if(occurrences['d'] / str.size() >= .040) score++;
+    if(occurrences['l'] / str.size() >= .035) score++;
+    if(occurrences['u'] / str.size() >= .025) score++;
+
+    return score;
 }
 }
 #endif

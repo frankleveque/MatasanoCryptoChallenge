@@ -36,14 +36,17 @@ int main()
 
     HexConverter hex;
     Base64Converter b64;
-    std::cout << "Original Hex: " << std::endl 
+
+    std::cout << "Original Hex: " << std::endl
         << originalHex << std::endl << std::endl;
 
     std::cout << "As Text:" << std::endl 
         << hex.decodeFromHex(originalHex) << std::endl << std::endl;
 
     std::cout << "As Base64:" << std::endl 
-        << b64.encodeIntoBase64(hex.decodeFromHex(originalHex));
+        << b64.encodeIntoBase64(hex.decodeFromHex(originalHex)) << std::endl << std::endl;
+
+    std::cout << "Press any key to continue..." << std::endl;
 
     //safe way to pause to observe output
     std::cin.get();

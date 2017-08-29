@@ -24,21 +24,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vector>
 #include <string>
 #include <sstream>
-
+#include <unordered_map>
 class HexConverter
 {
-private:
-    std::vector<char> hexTable;
-    std::string encoder(const std::string &input);
-    std::stringstream ss;
-    int findHex(char hexval);
-public:
-    HexConverter();
-    ~HexConverter();
-    std::string encodeIntoLowerCase(const std::string &input);
-    std::string encodeIntoUpperCase(const std::string &input);
-    std::string decodeFromHex(const std::string &input);
-//std::string decodeFromHex(char const* input);
+    private:
+        std::unordered_map<char, char> hexMap;
+        std::string encode(uint8_t input);
+        std::string encode(const std::string &input);
+        char decode(char nibble);
+        char decode(char a, char b);
+    public:
+        HexConverter();
+        HexConverter(const HexConverter&) = delete;
+        HexConverter(HexConverter&&) = delete;
+        HexConverter operator=(const HexConverter&) = delete;
+        HexConverter operator=(HexConverter&&) = delete;
+        ~HexConverter() = default;
+
+        void setUpperCase();
+        void setLowerCase();
+        std::string encodeIntoHex(uint8_t input);
+        std::string encodeIntoHex(const std::string& input);
+        std::string decodeFromHex(uint8_t input);
+        std::string decodeFromHex(const std::string &input);
 
 };
 #endif
