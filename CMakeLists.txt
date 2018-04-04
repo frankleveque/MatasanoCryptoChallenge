@@ -18,15 +18,17 @@ PROJECT(${ProjectName})
 INCLUDE_DIRECTORIES(
     ${CMAKE_SOURCE_DIR}/include)
 
-FILE(GLOB Headers 
-    ${CMAKE_SOURCE_DIR}/include/*.hpp 
+FILE(GLOB Headers
+    ${CMAKE_SOURCE_DIR}/include/*.hpp
     ${CMAKE_SOURCE_DIR}/include/*.h)
-FILE(GLOB Sources 
+FILE(GLOB Sources
     ${CMAKE_SOURCE_DIR}/src/hexconverter.cpp
     ${CMAKE_SOURCE_DIR}/src/b64converter.cpp
     )
-FILE(GLOB TestSources 
+FILE(GLOB TestSources
     ${CMAKE_SOURCE_DIR}/tests/*.cpp)
+FILE(COPY ${CMAKE_SOURCE_DIR}/4.txt
+    DESTINATION ${CMAKE_BINARY_DIR})
 
 ADD_EXECUTABLE(Tests
     ${Headers}
@@ -45,11 +47,16 @@ ADD_EXECUTABLE(challenge2
     ${CMAKE_SOURCE_DIR}/src/challenge2.cpp
     )
 
-
 ADD_EXECUTABLE(challenge3
     ${Headers}
     ${Sources}
     ${CMAKE_SOURCE_DIR}/src/challenge3.cpp
+    )
+
+ADD_EXECUTABLE(challenge4
+    ${Headers}
+    ${Sources}
+    ${CMAKE_SOURCE_DIR}/src/challenge4.cpp
     )
 
 
